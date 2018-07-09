@@ -10,6 +10,11 @@
   "engines": {
     "node": "8.11.1"
   },
+  "now":{
+    "engines":{
+      "node":"8.11.1"
+    }
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
