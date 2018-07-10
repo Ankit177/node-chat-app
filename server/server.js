@@ -8,6 +8,8 @@ var app=express();
 var server=http.createServer(app);
 var io=socketIO(server);
 var {generateMessage}=require('./Utils/message');
+var {generateLocationMessage}=require('./Utils/message');
+
 console.log(__dirname,'../public');
 console.log(publicPath);
 
@@ -24,11 +26,10 @@ io.on('connection',(socket)=>{
        //for broadcasting
        io.emit('newMessage',generateMessage( message.from,message.text))
        callback('this is from the server.'); 
-    // socket.broadcast.emit('newMessage',{
-    //     from:message.from,
-    //     text:message.text,
-    //     createdAt:new Date().getTime()
-    // })
+   
+   })
+   socket.on('createLocationMessage',(coords)=>{
+       io.emit('newLocationMessage',generateLocationMessage('Admin',coords.latitude ,coords.longitude))
    })
    socket.on('disconnect',()=>{
        console.log('user disconnected');
